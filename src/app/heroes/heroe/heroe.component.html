@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-between">
+  <a routerLink = "/heroes" class="btn btn-outline-danger">Volver</a>
+  <a routerLink = "/newheroe" class="btn btn-outline-success">Nuevo heroe</a>
+  <a routerLink="['/newheroe', '-LNAsS_iDMLzU-CLZ5YL']" class="btn btn-outline-success" name="button">Recuperar Heroe</a>
+  <a (click)="pruebaSubscribeAnidado()" class="btn btn-outline-primary"> Pruebas Subscribe Anidado</a>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="heroeForm" (ngSubmit)="guardar_firebase()">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre del heroe">
+      </div>
+      <div class="form-group">
+        <label for="tipo">Tipo</label>
+        <select class="form-control" formControlName="tipo">
+          <option value="heroe">Héroe</option>
+          <option value="villano">Villano</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="bio">Bio</label>
+        <textarea formControlName="bio" class="form-control" cols="80" rows="8"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" name="button" class="btn btn-outline-primary">
+        <i [ngClass]="{
+          'fa-save': estadoFormEnum !== estadoForm.enviando,
+          'fa-refresh fa-spin': estadoFormEnum == estadoForm.enviando
+        }" class="fa"></i>
+        Guardar Cambios</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div [ngSwitch]="estadoFormEnum">
+  <div *ngSwitchCase="estadoForm.envioOkPost" class="alert alert-success" role="alert"><strong>OK</strong> Heroe dado de alta coorectamente</div>
+  <div *ngSwitchCase="estadoForm.envioOkPut" class="alert alert-success" role="alert"><strong>OK</strong> Heroe ha sido actualizado correctamente</div>
+  <div *ngSwitchCase="estadoForm.envioError" class="alert alert-danger" role="alert"><strong>ERROR:</strong> Se ha producido un error a la hora de dar de alta al heroe</div>
+  <div *ngSwitchCase="estadoForm.formInvalido" class="alert alert-danger" role="alert"><strong>ATENCION:</strong> Revise los campos</div>
+  <div *ngSwitchDefault></div>
+</div>

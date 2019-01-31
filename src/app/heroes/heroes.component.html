@@ -1,0 +1,52 @@
+<div class="">
+<h1>Heroes</h1>
+<div class="d-flex justify-content-between">
+<a [routerLink]="['/newheroe']" class="btn btn-secondary"> Añadir Héroe</a> <!--Pasar paremetro newheroe y nuevo-->
+</div>
+<div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Tipo </th>
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr *ngFor="let key of x | async  | claveValor ; let i = index"> --><!--FUNCIONA-->
+     <!--<tr *ngFor="let key of x | async ; let i = index">--> <!--FUNCIONA-->
+       <!--<tr *ngFor="let key of heroes | claveValor: ejecutarPipe | async; let i = index">--><!--No FUNCHA-->
+        <tr *ngFor="let key of heroes | claveValor: ejecutarPipe | async; let i = index">
+      <!-- <th scope="row">{{i+1}}</th>
+      <td>{{heroes[key].nombre}}}</td>
+      <td>{{heroes[key].tipo}}</td>
+      <td>{{heroes[key]}}</td> -->
+      <th scope="row">{{i+1}}</th>
+      <!---#############################################################--->
+      <td>{{heroes[key].nombre}}</td>
+      <td>{{heroes[key].tipo}}</td>
+      <td>{{heroes[key].bio}}</td>
+      <!---##############################Funciona con los dos primeros###############################--->
+      <!-- <td>{{key.nombre}}</td>
+      <td>{{key.tipo || 'sin definir'}}</td>
+      <td>{{key.bio || 'sin descripcion'}}</td> -->
+    </tr>
+
+</table>
+
+<a [routerLink]="['/newheroe', 'nuevo']" title="Editar Heroe" class="btn btn-warning mr-2" > <i aria-hidden="true" class="fa fa-pencil-square-o"></i></a>
+<a (click)="eliminarHeroe('nuevo')" title="Eliminar Heroe" class="btn btn-danger"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+</div>
+
+<div class="mr-2">
+  <h3>Introduzca el nombre de la persona a  Eliminar</h3>
+  <input  class="form-control mr-sm-2 mr-2" type="search" placeholder="Eliminar Heroe"  (keyup.enter)= "eliminarHeroe(textoBusqueda.value)" #textoBusqueda aria-label="Search" >
+  <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit" (click)= "eliminarHeroe(textoBusqueda.value)">Eliminar</button>
+</div>
+
+<div class="mr-2">
+    <h3>Introduzca el nombre de la persona a Editar</h3>
+    <input  class="form-control mr-sm-2 mr-2" type="search" placeholder="Buscar Heroe"  (keyup.enter)= "buscarHeroe(textoBusqueda.value)" #textoBusqueda aria-label="Search" >
+    <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit" (click)= "buscarHeroe(textoBusqueda.value)">Buscar</button>
+  </div>

@@ -1,0 +1,7 @@
+
+<div class="timer">
+  <!--<div time='timer.countdown$ | async ' > {{this.timer.countdownEnd$ | async }}</div>-->
+  <div>{{this.timer.countdownEnd$ | async}}</div>
+ <!-- {{x}} -->
+  <button (click)="timer.restartCountdown()">RESTART</button>
+</div>
